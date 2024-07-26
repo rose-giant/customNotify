@@ -3,10 +3,10 @@ package providers
 import (
 	"slices"
 
-	"example.com/custom_notify/pkg/providers/smtp"
-	"example.com/custom_notify/pkg/types"
 	"github.com/acarl005/stripansi"
 	"github.com/pkg/errors"
+	"github.com/rose-giant/customNotify/pkg/providers/smtp"
+	"github.com/rose-giant/customNotify/pkg/types"
 	log "github.com/sirupsen/logrus"
 	"go.uber.org/multierr"
 )

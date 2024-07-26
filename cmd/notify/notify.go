@@ -1,9 +1,9 @@
 package main
 
 import (
-	// "example.com/custom_notify/goflags"
-	"example.com/custom_notify/pkg/types"
-	// "example.com/custom_notify/uncover/runner"
+	// "github.com/rose-giant/customNotify/goflags"
+	"github.com/rose-giant/customNotify/pkg/types"
+	// "github.com/rose-giant/customNotify/uncover/runner"
 	// "github.com/projectdiscovery/notify/internal/runner"
 	// "github.com/projectdiscovery/notify/pkg/types"
 )
