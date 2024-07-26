@@ -5,6 +5,7 @@ import (
 
 	"github.com/acarl005/stripansi"
 	"github.com/pkg/errors"
+	"github.com/rose-giant/customNotify/pkg/providers/gotify"
 	"github.com/rose-giant/customNotify/pkg/providers/smtp"
 	"github.com/rose-giant/customNotify/pkg/types"
 	log "github.com/sirupsen/logrus"
@@ -13,7 +14,8 @@ import (
 
 // ProviderOptions is configuration for notify providers
 type ProviderOptions struct {
-	SMTP []*smtp.Options `yaml:"smtp,omitempty"`
+	SMTP   []*smtp.Options   `yaml:"smtp,omitempty"`
+	Gotify []*gotify.Options `yaml:"gotify,omitempty"`
 }
 
 // Provider is an interface implemented by providers
@@ -36,6 +38,15 @@ func New(providerOptions *ProviderOptions, options *types.Options) (*Client, err
 		provider, err := smtp.New(providerOptions.SMTP, options.IDs)
 		if err != nil {
 			return nil, errors.Wrap(err, "could not create smtp provider client")
+		}
+		client.providers = append(client.providers, provider)
+	}
+
+	if providerOptions.Gotify != nil && (len(options.Providers) == 0 || slices.Contains(options.Providers, "gotify")) {
+
+		provider, err := gotify.New(providerOptions.Gotify, options.IDs)
+		if err != nil {
+			return nil, errors.Wrap(err, "could not create gotify provider client")
 		}
 		client.providers = append(client.providers, provider)
 	}
